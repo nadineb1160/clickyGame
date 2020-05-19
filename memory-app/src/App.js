@@ -12,7 +12,7 @@ import Picture from "./components/Picture";
 class App extends Component {
   state = {
     pictures,
-    picIds: [],
+    seenPictures: [],
     start: false,
     correct: false,
     score: 0,
@@ -24,7 +24,6 @@ class App extends Component {
   shuffle = () => {
     // Shuffle pictures
     this.state.pictures.sort(() => Math.random() - 0.5);
-
   }
 
   update = () => {
@@ -46,36 +45,36 @@ class App extends Component {
 
   reset = () => {
     // Shuffle cards
+    this.shuffle();
+    // Start -> false
     this.setState( { start: false });
     // Reset score
     this.setState({score: 0});
+    // Reset pictureIds
+    this.setState({seenPictures: []})
 
   }
 
   handleOnClick = (id) => {
-    // if picture empty 
     // Start game 
-    if (pictures.length === 0) {
+    if (this.state.seenPictures.length === 0) {
       this.setState({ start: true });
     }
-    // Check if id in pictures
-    if (this.state.picIds.includes(id)) {
-      // set correct to false
+    // Check picture previously clicked
+    if (this.state.seenPictures.includes(id)) {
+      // Set correct to false
       this.setState({ correct: false });
       // Reset
       this.reset();
     } else {
       // Clicked new picture
-      let pics = this.state.picIds
-      pics.push(id)
-      console.log(pics)
-      this.setState({ picIds: pics});
+      let pics = this.state.seenPictures;
+      pics.push(id);
+      this.setState({ seenPictures: pics});
       this.setState({ correct: true });
       // Update score and board
       this.update();
-
     }
-
   }
 
   render() {
