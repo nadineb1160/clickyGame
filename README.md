@@ -1,4 +1,5 @@
 # Clicky Game
+https://nadineb1160.github.io/clickyGame/
 
 This is a react memory game. The goal of the game is to click all the images rendered to the page without clicking on the same image, twice. The application keeps track of the user's score. The user's score should increments when clicking an image for the first time. The user's score is reset to 0 if they click the same image more than once. Every time an image is clicked, the images rendered to the page shuffle themselves in a random order. Once the user's score is reset after an incorrect guess, the game restarts.
 
